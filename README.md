@@ -18,21 +18,24 @@ Specifically, we frame the problem as a *semantic segmentation* task and we use 
 The material is organized into notebooks that cover every stage of a realistic data analysis pipeline. In particular, a great deal of attention is devoted to EDA both to expose the challenges of the dataset and to evaluate the results. Likewise, technical aspects of the fastai implementation are detailed. 
 For more details on the implementations see `blocks.py` and `utils.py` scripts.
 
+
 ## Installation
-Simply follow the instructions in `installation_instructions.txt` to set up your workspace. Then download the data as described in the notebook `01. Exploratory Data Analysis.ipynb`. Each step of the analysis is detailed in a dedicated notebook under the folder `notebooks/`.
+
+```
+git clone git@github.com:clissa/object-counting-ML-INFN.git
+```
+
+After cloning the repository, simply follow the instructions in `installation.txt` to set up your workspace. Then download the data as described in the notebook `01. Exploratory Data Analysis.ipynb`. Each step of the analysis is detailed in a dedicated notebook under the folder `notebooks/`.
+
 
 ## References
 Morelli, R., Clissa, L., Amici, R. et al. [Automating cell counting in fluorescent microscopy through deep learning with c-ResUnet.](https://rdcu.be/c8hKy) Sci Rep 11, 22920 (2021).
 
-
 Clissa, L. [Supporting Scientific Research Through Machine and Deep Learning: Fluorescence Microscopy and Operational Intelligence Use Cases.](http://amsdottorato.unibo.it/10016/) PhD Thesis (2022)
-
 
 Clissa, L. et al. [Fluorescent Neuronal Cells.](http://amsacta.unibo.it/6706/) AMS Acta (2021)
 
-
 [Fluorescent Neuronal Cells dataset – part I](https://medium.com/towards-data-science/fluorescent-neuronal-cells-dataset-part-i-ac123196b963), TDS Blog
-
 
 [Fluorescent Neuronal Cells dataset – part II](https://medium.com/towards-data-science/fluorescent-neuronal-cells-dataset-part-ii-e1ac27e26d7), TDS Blog
 
