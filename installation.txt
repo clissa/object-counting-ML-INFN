@@ -1,4 +1,4 @@
-conda create -n corso_DLI python=3.9.6
+conda create -n object-counting-ML-INFN python=3.9.6
 
 # conda install -c conda-forge mamba 
 
