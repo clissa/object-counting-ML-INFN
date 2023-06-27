@@ -1,14 +1,67 @@
 import pickle
 from skimage.feature import peak_local_max
-from skimage.morphology import remove_small_holes, remove_small_objects, label
 from skimage.segmentation import watershed
+from skimage.morphology import remove_small_holes, remove_small_objects, label
 from scipy import ndimage
 from math import hypot
 import numpy as np
 import torch
 import seaborn as sns
 import matplotlib.pyplot as plt
+from collections import OrderedDict
+import functools
+import torch
 
+
+def load_pkl(path):
+    with open(path, "rb") as f:
+        d = pickle.load(f)
+        return d
+        
+
+def rsetattr(obj, attr, val):
+    pre, _, post = attr.rpartition(".")
+    return setattr(rgetattr(obj, pre) if pre else obj, post, val)
+
+
+def rgetattr(obj, attr, *args):
+    def _getattr(obj, attr):
+        return getattr(obj, attr, *args)
+
+    return functools.reduce(_getattr, [obj] + attr.split("."))
+
+
+def k2pt_weights(keras_w):
+    k_w = keras_w.copy()
+    if k_w.ndim == 4:  # convolution filter
+        torch_w = torch.from_numpy(k_w.transpose((3, 2, 0, 1)))
+    elif k_w.ndim == 1:  # convolution bias; batchnorm weight/gamma and bias/beta
+        torch_w = torch.from_numpy(k_w)
+    else:
+        raise ValueError(
+            f"Unexpected shape {k_w.shape} has dimension {k_w.ndim} instead of 1 or 4."
+        )
+    return torch_w
+
+
+def transfer_weights(model, k_dict, pt_dict, freeze=True):
+    for pt_key, k_weight in zip(pt_dict.keys(), k_dict.values()):
+        if freeze:
+            with torch.no_grad():
+                rsetattr(model, f"{pt_key}.data", k2pt_weights(k_weight))
+        else:
+            rsetattr(model, f"{pt_key}.data", k2pt_weights(k_weight))
+            
+            
+def pt2k_state_dict(d):
+    """
+    Return state_dict without PyTorch-specific layers. This makes it comparable with Keras weight format
+    :param d: pytorch model state_dict
+    :return: state_dict in Keras-like format
+    """
+    fixed = OrderedDict({k: v for k, v in d.items() if not "num_batches_tracked" in k})
+    return fixed
+    
 
 def write_config(cfg: dict, save_path: str):
     with open(save_path, "wb") as f:
