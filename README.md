@@ -1,7 +1,8 @@
 # Object counting by segmentation ML-INFN
 
 [![GitHub commit](https://img.shields.io/github/last-commit/clissa/object-counting-ML-INFN)](https://github.com/clissa/object-counting-ML-INFN)
-
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
 ---
 
 ![cover](https://media.springernature.com/full/springer-static/image/art%3A10.1038%2Fs41598-021-01929-5/MediaObjects/41598_2021_1929_Fig1_HTML.jpg?as=webp)
